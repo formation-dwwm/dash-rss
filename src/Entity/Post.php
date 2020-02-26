@@ -95,6 +95,11 @@ class Post
     private $idContent;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $post_url;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -106,5 +111,17 @@ class Post
         if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
             throw new \InvalidArgumentException("État non reconnu");
         }
+    }
+
+    public function getPostUrl(): ?string
+    {
+        return $this->post_url;
+    }
+
+    public function setPostUrl(string $post_url): self
+    {
+        $this->post_url = $post_url;
+
+        return $this;
     }
 }

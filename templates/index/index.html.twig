@@ -1,17 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Le Dash{% endblock %}
 
 {% block body %}
 
-
-<div class="jumbotron jumbotron-fluid text-center">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/dash-rss/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/dash-rss/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
+<div class="w-75 mx-auto mt-4">
+    <table class="table table-hover table-danger">
+        <thead>
+            <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Thème</th>
+            <th scope="col">Source</th>
+            <th scope="col">Titre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td><a href="" name="">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
 </div>
 {% endblock %}
