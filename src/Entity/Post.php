@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Post
  *
  * @ORM\Table(name="post", indexes={@ORM\Index(name="post_theme0_FK", columns={"id_theme"}), @ORM\Index(name="post_source_FK", columns={"id_source"})})
- * @ORM\Entity
+ *  @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
 {
@@ -121,6 +123,128 @@ class Post
     public function setPostUrl(string $post_url): self
     {
         $this->post_url = $post_url;
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function getAlert(): ?bool
+    {
+        return $this->alert;
+    }
+
+    public function setAlert(bool $alert): self
+    {
+        $this->alert = $alert;
+
+        return $this;
+    }
+
+    public function getIdSource(): ?Source
+    {
+        return $this->idSource;
+    }
+
+    public function setIdSource(?Source $idSource): self
+    {
+        $this->idSource = $idSource;
+
+        return $this;
+    }
+
+    public function getIdTheme(): ?Theme
+    {
+        return $this->idTheme;
+    }
+
+    public function setIdTheme(?Theme $idTheme): self
+    {
+        $this->idTheme = $idTheme;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getIdContent(): Collection
+    {
+        return $this->idContent;
+    }
+
+    public function addIdContent(Tag $idContent): self
+    {
+        if (!$this->idContent->contains($idContent)) {
+            $this->idContent[] = $idContent;
+            $idContent->addIdPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdContent(Tag $idContent): self
+    {
+        if ($this->idContent->contains($idContent)) {
+            $this->idContent->removeElement($idContent);
+            $idContent->removeIdPost($this);
+        }
 
         return $this;
     }

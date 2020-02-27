@@ -7,4 +7,9 @@ $theme-colors:(
  "info": #ebf1f4
 );
 
+.dash_logo img{
+    width: 200px;
+    height: 100px;
+}
+
 @import "node_modules/bootstrap/scss/bootstrap";
