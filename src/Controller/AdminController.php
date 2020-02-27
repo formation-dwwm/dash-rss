@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Source;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
@@ -24,7 +27,7 @@ class AdminController extends AbstractController
     */
     public function feed()
     {
-        $page_title = 'Le Flux';
+        $page_title = 'Tous les flux';
         return $this->render('flux/index.html.twig', [
             'name' => 'Le Flux', 'page_title' => $page_title
         ]);
@@ -46,7 +49,7 @@ class AdminController extends AbstractController
     */
     public function trash()
     {
-        $page_title = 'Corbeille';
+        $page_title = 'Articles supprimés';
         return $this->render('trash/index.html.twig', [
             'name' => 'Corbeille', 'page_title' => $page_title
         ]);
@@ -93,7 +96,7 @@ class AdminController extends AbstractController
                 "rss_url" => "http://01.net.com/rss/actus.xml"
             ]
         ];
-
+        
         $page_title = 'Configuration des flux RSS';
         return $this->render('config/config_rss.html.twig', [
             'name' => 'Configuration Flux RSS', 'page_title' => $page_title, 'feeds' => $feeds
