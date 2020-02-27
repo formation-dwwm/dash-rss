@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Source;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Source;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\Type\SourceType;
 
 class AdminController extends AbstractController
 {
@@ -100,6 +105,38 @@ class AdminController extends AbstractController
         $page_title = 'Configuration des flux RSS';
         return $this->render('config/config_rss.html.twig', [
             'name' => 'Configuration Flux RSS', 'page_title' => $page_title, 'feeds' => $feeds
+        ]);
+    }
+
+    /**
+     * @Route("/config/create_rss", name="create_rss")
+     */
+    public function createRssUrl(Request $request)
+    {
+        $page_title = 'Ajouter un nouveau flux RSS';
+
+
+        $source = new Source();
+
+        $form = $this->createForm(SourceType::class, $source);
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $source = $form->getData();
+    
+            // ... perform some action, such as saving the task to the database
+            // for example, if Source is a Doctrine entity, save it!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($source);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('config_rss');
+        }
+
+        return $this->render('config/create_rss.html.twig', [
+            'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfig' => $form->createView(),
         ]);
     }
 

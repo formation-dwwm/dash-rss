@@ -1,0 +1,46 @@
+{% extends 'config/config.html.twig' %}
+{% block main %}
+    <div class="row">
+        <div class="col">
+            <h3>Ajouter un flux</h3>
+        </div>
+    </div>
+    <div class="row">
+
+        {# Manual Form #}
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form" action="" method="POST">
+                        <label class="sr-only" for="inlineFormInputGroupName">Nom</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Nom</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupName" name="name">
+                        </div>
+
+                        <label class="sr-only" for="inlineFormInputGroupUrl">URL</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text px-3">URL</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupUrl" name="rssUrl">
+                        </div>
+                        <button type="submit" class="btn btn-secondary mb-2 float-right" name="save">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {# Form Builder #}
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    {{ form(formConfig) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
