@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="w-75 mx-auto mt-4">
-    <table class="table table-hover table-danger">
+    <table class="table table-warning">
         <thead>
             <tr>
             <th scope="col">Date</th>
@@ -15,14 +15,14 @@
             </tr>
         </thead>
         <tbody>
+            {% for post in posts %}
             <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td><a href="" name="">
-                    </a>
-                </td>
+                <th type="button" data-toggle="collapse" data-target="#collapse{{ post.id }}" aria-expanded="false" aria-controls="collapseExample">{{ post.date.date }}</th>
+                    <td>{{ post.idTheme.name }}</td>
+                    <td>{{ post.idSource.name }}</td>
+                    <td>{{ post.title }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>  
 </div>
