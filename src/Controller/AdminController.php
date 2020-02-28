@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Source;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\SourceType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+
 
 class AdminController extends AbstractController
 {
@@ -61,72 +61,23 @@ class AdminController extends AbstractController
     }
 
     /**
-    * @Route("/config/rss", name="config_rss", methods = {"GET"})
-    *  @Route("/config", name="config", methods = {"GET"})
+    * @Route("/config/rss", name="config_rss")
+    * @Route("/config", name="config")
     */
-    public function configuration_rss()
+    public function configuration_rss(Request $request)
     {
-        // $feeds = FETCH_WITH_SQL('posts');
-        $feeds = [
-            [
-                "name" => "01Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "02Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "03Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "04Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "01Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "02Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "03Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ],
-            [
-                "name" => "04Net",
-                "rss_url" => "http://01.net.com/rss/actus.xml"
-            ]
-        ];
-        
         $page_title = 'Configuration des flux RSS';
-        return $this->render('config/config_rss.html.twig', [
-            'name' => 'Configuration Flux RSS', 'page_title' => $page_title, 'feeds' => $feeds
-        ]);
-    }
-
-    /**
-     * @Route("/config/create_rss", name="create_rss")
-     */
-    public function createRssUrl(Request $request)
-    {
-        $page_title = 'Ajouter un nouveau flux RSS';
-
 
         $source = new Source();
 
-        $form = $this->createForm(SourceType::class, $source);
-        
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $addForm = $this->createForm(SourceType::class, $source);
+        $addForm->handleRequest($request);
+        if ($addForm->isSubmitted() && $addForm->isValid()) {
             // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            $source = $form->getData();
+            // but, the original `$source` variable has also been updated
+            $source = $addForm->getData();
     
-            // ... perform some action, such as saving the task to the database
+            // ... perform some action, such as saving the source to the database
             // for example, if Source is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($source);
@@ -135,8 +86,19 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('config_rss');
         }
 
+        
+        $fakeSource = new Source();
+        $fakeSource->setName("01Net");
+        $fakeSource->setRssUrl("https://google.com");
+
+        $fakeSource2 = new Source();
+        $fakeSource2->setName("02Net");
+        $fakeSource2->setRssUrl("https://google.com");
+
+        $feeds = [$fakeSource, $fakeSource2];
+
         return $this->render('config/create_rss.html.twig', [
-            'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfig' => $form->createView(),
+            'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfig' => $addForm->createView(), 'feeds' => $feeds
         ]);
     }
 

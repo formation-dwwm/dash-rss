@@ -7,32 +7,6 @@
     </div>
     <div class="row">
 
-        {# Manual Form #}
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
-            <div class="card">
-                <div class="card-body">
-                    <form class="form" action="" method="POST">
-                        <label class="sr-only" for="inlineFormInputGroupName">Nom</label>
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Nom</div>
-                            </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupName" name="name">
-                        </div>
-
-                        <label class="sr-only" for="inlineFormInputGroupUrl">URL</label>
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text px-3">URL</div>
-                            </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupUrl" name="rssUrl">
-                        </div>
-                        <button type="submit" class="btn btn-secondary mb-2 float-right" name="save">Valider</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         {# Form Builder #}
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
             <div class="card">
@@ -42,5 +16,47 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="row mt-5">
+        <div class="col">
+            <h3>Modifier un flux</h3>
+        </div>
+    </div>
+    <div class="row ">
+        {% for feed in feeds %}
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form">
+                        <label class="sr-only" for="inlineFormInputGroupName">Nom</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Nom</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupName" value="{{feed.name}}">
+                        </div>
+
+                        <label class="sr-only" for="inlineFormInputGroupUrl">URL</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text px-3">URL</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupUrl" value="{{feed.rssUrl}}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-secondary mb-2 mx-2" data-id="{{feed.id}}">Valider</button>
+                            <button type="submit" class="btn btn-danger mb-2">Supprimer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            Aucun flux RSS trouvé.
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="script.js"></script>
 {% endblock %}
