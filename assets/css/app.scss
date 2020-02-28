@@ -4,12 +4,23 @@ $theme-colors:(
  "success" : #183451,
  "warning": #77246e,
  "danger" : #158298,
- "info": #ebf1f4
+ "info": #ebf1f4,
+ "fbColor": #1877f2,
+ "twtColor": #4eaef8,
+ "lkColor": #1a85bc,
+ "msgColor": #0aba27,
+ "mailColor": #db4437
 );
+
 
 .dash_logo img{
     width: 200px;
     height: 100px;
+}
+
+.logo{
+    width: 30px;
+    height: 30px;
 }
 
 @import "node_modules/bootstrap/scss/bootstrap";

@@ -17,16 +17,41 @@
         <tbody>
             {% for post in posts %}
             <tr>
-                <th type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample">{{ post.date.date }}</th>
-                <div class="collapse" id="collapseExample{{ post.id }}">
-                    <div class="card card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </div>
-                </div>
+                <td type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample">{{ post.date.date|date('d/m/Y') }}</td>
+                
                 <td>{{ post.idTheme.name }}</td>
                 <td>{{ post.idSource.name }}</td>
                 <td>{{ post.title }}</td>
             </tr>
+            
+            <tr class="collapse" id="collapseExample{{ post.id }}">
+                    <td colspan="4">
+                        <div class="card card-body">
+                        <a href="{{ post.postUrl }}">{{ post.content }}</a>
+                        <p>Auteur: {{ post.author }}  Mots-clés: {{ post.idContent }}</p>
+                        </div>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-secondary"><a href="{{ post.postUrl }}">Lire la suite</a></button>
+                                <button type="button" class="btn btn-msgColor">
+                                    <svg class="bi bi-chat" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8.207 13.293L7.5 14a5.5 5.5 0 110-11h5a5.5 5.5 0 110 11s-1.807 2.169-4.193 2.818C7.887 16.933 7.449 17 7 17c.291-.389.488-.74.617-1.052C8.149 14.649 7.5 14 7.5 14c.707-.707.708-.707.708-.706h.001l.002.003.004.004.01.01a1.184 1.184 0 01.074.084c.039.047.085.108.134.183.097.15.206.36.284.626.114.386.154.855.047 1.394.717-.313 1.37-.765 1.895-1.201a10.266 10.266 0 001.013-.969l.05-.056.01-.012m0 0A1 1 0 0112.5 13a4.5 4.5 0 100-9h-5a4.5 4.5 0 000 9 1 1 0 01.707.293" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-fbColor">
+                                    <svg width="2em" height="2em" data-name="레이어 1" id="레이어_1" viewBox="0 0 36 36" fill="#fff" xmlns="http://www.w3.org/2000/svg"><title/><path d="M19.38,28.92H15.19a.75.75,0,0,1-.75-.75v-9H13.1a.75.75,0,0,1-.75-.75V15a.75.75,0,0,1,.75-.75h1.34V13c0-3.4,1.78-5.13,5.29-5.13h2.8a.75.75,0,0,1,.75.75V12a.75.75,0,0,1-.75.75H20.78a1.3,1.3,0,0,0-.62.08,3.56,3.56,0,0,0,0,.52v.93h2.41a.75.75,0,0,1,.75.83l-.37,3.36a.75.75,0,0,1-.75.67h-2v9A.75.75,0,0,1,19.38,28.92Zm-3.44-1.5h2.69v-9a.75.75,0,0,1,.75-.75H21.5l.21-1.86H19.38a.75.75,0,0,1-.75-.75V13.35c0-1.09.26-2.1,2.14-2.1h1V9.39h-2c-2.69,0-3.79,1.05-3.79,3.63v2a.75.75,0,0,1-.75.75H13.85v1.86h1.34a.75.75,0,0,1,.75.75Z"/></svg>
+                                </button>
+                                <button type="button" class="btn btn-twtColor">Twitter</button>
+                                <button type="button" class="btn btn-lkColor">LinkedIn</button>
+                                <button type="button" class="btn btn-mailColor">
+                                <svg class="bi bi-envelope" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 5H4a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V6a1 1 0 00-1-1zM4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M2.071 6.243a.5.5 0 01.686-.172L10 10.417l7.243-4.346a.5.5 0 11.514.858L10 11.583 2.243 6.93a.5.5 0 01-.172-.686z" clip-rule="evenodd"/>
+                                </svg>
+                                </button>
+                            </div>
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
         
