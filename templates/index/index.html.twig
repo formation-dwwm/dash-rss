@@ -18,7 +18,6 @@
             {% for post in posts %}
             <tr>
                 <td type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample">{{ post.date.date|date('d/m/Y') }}</td>
-                
                 <td>{{ post.idTheme.name }}</td>
                 <td>{{ post.idSource.name }}</td>
                 <td>{{ post.title }}</td>
@@ -28,26 +27,46 @@
                     <td colspan="4">
                         <div class="card card-body">
                         <a href="{{ post.postUrl }}">{{ post.content }}</a>
-                        <p>Auteur: {{ post.author }}  Mots-clés: {{ post.idContent }}</p>
+                        <p>Auteur : {{ post.author }}  Mots-clés : </p>
                         </div>
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group ml-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary"><a href="{{ post.postUrl }}">Lire la suite</a></button>
+                            </div>
+                            <div class="btn-group mr-2" role="group" aria-label="Second group">
                                 <button type="button" class="btn btn-msgColor">
-                                    <svg class="bi bi-chat" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8.207 13.293L7.5 14a5.5 5.5 0 110-11h5a5.5 5.5 0 110 11s-1.807 2.169-4.193 2.818C7.887 16.933 7.449 17 7 17c.291-.389.488-.74.617-1.052C8.149 14.649 7.5 14 7.5 14c.707-.707.708-.707.708-.706h.001l.002.003.004.004.01.01a1.184 1.184 0 01.074.084c.039.047.085.108.134.183.097.15.206.36.284.626.114.386.154.855.047 1.394.717-.313 1.37-.765 1.895-1.201a10.266 10.266 0 001.013-.969l.05-.056.01-.012m0 0A1 1 0 0112.5 13a4.5 4.5 0 100-9h-5a4.5 4.5 0 000 9 1 1 0 01.707.293" clip-rule="evenodd"/>
-                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2em" height="2em" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512px" height="512px"><g><path d="M256,31.344c-141.152,0-256,93.312-256,208c0,58.592,29.824,113.536,82.304,152.832  c-15.744,23.2-39.104,47.936-70.144,55.648c-7.424,1.856-12.512,8.672-12.128,16.32s6.08,13.952,13.664,15.04  c1.152,0.16,10.656,1.472,26.272,1.472c32.48,0,91.328-5.696,155.968-39.168c19.168,3.872,39.328,5.856,60.064,5.856  c141.152,0,256-93.312,256-208S397.152,31.344,256,31.344z" data-original="#2196F3" class="active-path" data-old_color="#2196F3" fill="#FFFFFF"/></g> </svg>
                                 </button>
                                 <button type="button" class="btn btn-fbColor">
-                                    <svg width="2em" height="2em" data-name="레이어 1" id="레이어_1" viewBox="0 0 36 36" fill="#fff" xmlns="http://www.w3.org/2000/svg"><title/><path d="M19.38,28.92H15.19a.75.75,0,0,1-.75-.75v-9H13.1a.75.75,0,0,1-.75-.75V15a.75.75,0,0,1,.75-.75h1.34V13c0-3.4,1.78-5.13,5.29-5.13h2.8a.75.75,0,0,1,.75.75V12a.75.75,0,0,1-.75.75H20.78a1.3,1.3,0,0,0-.62.08,3.56,3.56,0,0,0,0,.52v.93h2.41a.75.75,0,0,1,.75.83l-.37,3.36a.75.75,0,0,1-.75.67h-2v9A.75.75,0,0,1,19.38,28.92Zm-3.44-1.5h2.69v-9a.75.75,0,0,1,.75-.75H21.5l.21-1.86H19.38a.75.75,0,0,1-.75-.75V13.35c0-1.09.26-2.1,2.14-2.1h1V9.39h-2c-2.69,0-3.79,1.05-3.79,3.63v2a.75.75,0,0,1-.75.75H13.85v1.86h1.34a.75.75,0,0,1,.75.75Z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2em" height="2em" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 155.139 155.139" style="enable-background:new 0 0 155.139 155.139;" xml:space="preserve" width="512px" height="512px" class=""><g><g>
+                                    <path id="f_1_" d="M89.584,155.139V84.378h23.742l3.562-27.585H89.584V39.184   c0-7.984,2.208-13.425,13.67-13.425l14.595-0.006V1.08C115.325,0.752,106.661,0,96.577,0C75.52,0,61.104,12.853,61.104,36.452   v20.341H37.29v27.585h23.814v70.761H89.584z" data-original="#010002" class="active-path" data-old_color="#010002" fill="#FFFFFF"/>
+                                    </g></g> </svg>
                                 </button>
-                                <button type="button" class="btn btn-twtColor">Twitter</button>
-                                <button type="button" class="btn btn-lkColor">LinkedIn</button>
+                                <button type="button" class="btn btn-twtColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2em" height="2em" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512px" height="512px"><g><g>
+                                    <g>
+                                        <path d="M512,97.248c-19.04,8.352-39.328,13.888-60.48,16.576c21.76-12.992,38.368-33.408,46.176-58.016    c-20.288,12.096-42.688,20.64-66.56,25.408C411.872,60.704,384.416,48,354.464,48c-58.112,0-104.896,47.168-104.896,104.992    c0,8.32,0.704,16.32,2.432,23.936c-87.264-4.256-164.48-46.08-216.352-109.792c-9.056,15.712-14.368,33.696-14.368,53.056    c0,36.352,18.72,68.576,46.624,87.232c-16.864-0.32-33.408-5.216-47.424-12.928c0,0.32,0,0.736,0,1.152    c0,51.008,36.384,93.376,84.096,103.136c-8.544,2.336-17.856,3.456-27.52,3.456c-6.72,0-13.504-0.384-19.872-1.792    c13.6,41.568,52.192,72.128,98.08,73.12c-35.712,27.936-81.056,44.768-130.144,44.768c-8.608,0-16.864-0.384-25.12-1.44    C46.496,446.88,101.6,464,161.024,464c193.152,0,298.752-160,298.752-298.688c0-4.64-0.16-9.12-0.384-13.568    C480.224,136.96,497.728,118.496,512,97.248z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                                    </g>
+                                    </g></g> </svg>
+                                </button>
+                                <button type="button" class="btn btn-lkColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2em" height="2em" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512.02 512.02" style="enable-background:new 0 0 512.02 512.02;" xml:space="preserve" width="512px" height="512px" class=""><g><g transform="translate(0 -1)">
+                                    <path d="M61.813,5.424c33.545,0,61.793,28.248,61.793,61.793c0,35.31-30.014,62.676-61.793,61.793   C29.151,129.893,0.02,102.527,0.02,67.217C-0.863,32.789,27.386,5.424,61.813,5.424" data-original="#007AAA" class="active-path" data-old_color="#007AAA" fill="#FFFFFF"/>
+                                    <path d="M96.241,508.596H25.62c-9.71,0-17.655-7.945-17.655-17.655V181.976   c0-9.71,7.062-17.655,16.772-17.655h71.503c9.71,0,17.655,7.945,17.655,17.655v309.848   C113.896,500.651,105.951,508.596,96.241,508.596" data-original="#007AAA" class="active-path" data-old_color="#007AAA" fill="#FFFFFF"/>
+                                    <path d="M511.137,272.017c0-65.324-48.552-116.524-113.876-116.524h-18.538   c-35.31,0-69.738,16.772-88.276,44.138c-6.179,6.179-8.828,8.828-8.828,8.828v-35.31c0-3.531-5.297-8.828-8.828-8.828h-88.276   c-3.531,0-8.828,3.531-8.828,7.945v329.269c0,3.531,5.297,7.062,8.828,7.062h97.103c3.531,0,8.828-3.531,8.828-7.062V310.858   c0-32.662,24.717-60.028,57.379-60.91c16.772,0,31.779,6.179,43.255,17.655c10.593,10.593,15.007,25.6,15.007,42.372v189.793   c0,3.531,5.297,8.828,8.828,8.828h88.276c3.531,0,8.828-5.297,8.828-8.828V272.017H511.137z" data-original="#007AAA" class="active-path" data-old_color="#007AAA" fill="#FFFFFF"/>
+                                    </g></g> </svg>
+                                </button>
                                 <button type="button" class="btn btn-mailColor">
-                                <svg class="bi bi-envelope" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 5H4a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V6a1 1 0 00-1-1zM4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z" clip-rule="evenodd"/>
-                                    <path fill-rule="evenodd" d="M2.071 6.243a.5.5 0 01.686-.172L10 10.417l7.243-4.346a.5.5 0 11.514.858L10 11.583 2.243 6.93a.5.5 0 01-.172-.686z" clip-rule="evenodd"/>
-                                </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2em" height="2em" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512px" height="512px"><g><g>
+                                    <g>
+                                    <g>
+                                    <path d="M10.688,95.156C80.958,154.667,204.26,259.365,240.5,292.01c4.865,4.406,10.083,6.646,15.5,6.646     c5.406,0,10.615-2.219,15.469-6.604c36.271-32.677,159.573-137.385,229.844-196.896c4.375-3.698,5.042-10.198,1.5-14.719     C494.625,69.99,482.417,64,469.333,64H42.667c-13.083,0-25.292,5.99-33.479,16.438C5.646,84.958,6.313,91.458,10.688,95.156z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                                    <path d="M505.813,127.406c-3.781-1.76-8.229-1.146-11.375,1.542c-46.021,39.01-106.656,90.552-152.385,129.885     c-2.406,2.063-3.76,5.094-3.708,8.271c0.052,3.167,1.521,6.156,4,8.135c42.49,34.031,106.521,80.844,152.76,114.115     c1.844,1.333,4.031,2.01,6.229,2.01c1.667,0,3.333-0.385,4.865-1.177c3.563-1.823,5.802-5.49,5.802-9.49V137.083     C512,132.927,509.583,129.146,505.813,127.406z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                                    <path d="M16.896,389.354c46.25-33.271,110.292-80.083,152.771-114.115c2.479-1.979,3.948-4.969,4-8.135     c0.052-3.177-1.302-6.208-3.708-8.271C124.229,219.5,63.583,167.958,17.563,128.948c-3.167-2.688-7.625-3.281-11.375-1.542     C2.417,129.146,0,132.927,0,137.083v243.615c0,4,2.24,7.667,5.802,9.49c1.531,0.792,3.198,1.177,4.865,1.177     C12.865,391.365,15.052,390.688,16.896,389.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                                    <path d="M498.927,418.375c-44.656-31.948-126.917-91.51-176.021-131.365c-4-3.26-9.792-3.156-13.729,0.24     c-9.635,8.406-17.698,15.49-23.417,20.635c-17.563,15.854-41.938,15.854-59.542-0.021c-5.698-5.135-13.76-12.24-23.396-20.615     c-3.906-3.417-9.708-3.521-13.719-0.24c-48.938,39.719-131.292,99.354-176.021,131.365c-2.49,1.792-4.094,4.552-4.406,7.604     c-0.302,3.052,0.708,6.083,2.802,8.333C19.552,443.01,30.927,448,42.667,448h426.667c11.74,0,23.104-4.99,31.198-13.688     c2.083-2.24,3.104-5.271,2.802-8.323C503.021,422.938,501.417,420.167,498.927,418.375z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/>
+                                    </g>
+                                    </g>
+                                    </g></g> </svg>
                                 </button>
                             </div>
                     </td>

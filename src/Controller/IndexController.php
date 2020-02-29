@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\GroupRepository;
 use App\Repository\PostRepository;
+use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,4 +25,5 @@ class IndexController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
 }
