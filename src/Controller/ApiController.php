@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Source;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,9 @@ class ApiController extends AbstractController
 {
    
     /**
-     * @Route("api/source", methods={"POST"})
+     * @Route("api/source/{id}", methods={"POST"})
      */
-    function updateFeed(Request $req){
+    function updateFeed(Request $req, int $id){
 
         $data = [];
         if ($content = $req->getContent()) {
@@ -21,6 +22,19 @@ class ApiController extends AbstractController
         }
 
         // Update source if exists
+        $entityManager = $this->getDoctrine()->getManager();
+        $source = $this->getDoctrine()->getRepository(Source::class)->find($id);
+
+        if (!$source) {
+            throw $this->createNotFoundException(
+                'No source found for id '.$id
+            );
+        }
+
+        $source->setName($data['name']);
+        $source->setRssUrl($data['url']);
+        $entityManager->persist($source);
+        $entityManager->flush();
 
         $res = new JsonResponse([
             "success" => true
@@ -33,15 +47,26 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("api/source", methods={"DELETE"})
+     * @Route("api/source/{id}", methods={"DELETE"})
      */
-    function removeFeed(Request $req){
+    function removeFeed(Request $req, int $id){
         $data = [];
         if ($content = $req->getContent()) {
             $data = json_decode($content, true);
         }
 
-        // Del source if exists
+        // Delete source if exists
+        $entityManager = $this->getDoctrine()->getManager();
+        $source = $this->getDoctrine()->getRepository(Source::class)->find($id);
+
+        if (!$source) {
+            throw $this->createNotFoundException(
+                'No source found for id '.$id
+            );
+        }
+
+        $entityManager->remove($source);
+        $entityManager->flush();
 
         $res = new JsonResponse([
             "success" => true

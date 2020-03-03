@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+use App\Repository\sourceRepository;
 
 
 class AdminController extends AbstractController
@@ -86,22 +86,20 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('config_rss');
         }
 
-        
-        $fakeSource = new Source();
-        $fakeSource->setName("01Net");
-        $fakeSource->setRssUrl("https://google.com");
+        $feeds = $this->getDataSource();
 
-        $fakeSource2 = new Source();
-        $fakeSource2->setName("02Net");
-        $fakeSource2->setRssUrl("https://google.com");
-
-        $feeds = [$fakeSource, $fakeSource2];
-
-        return $this->render('config/create_rss.html.twig', [
+        return $this->render('config/config_rss.html.twig', [
             'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfig' => $addForm->createView(), 'feeds' => $feeds
         ]);
     }
 
+    public function getDataSource()
+    {
+        $repository = $this->getDoctrine()->getRepository(Source::class);
+        return $repository->findAll();
+    }
+
+   
     /**
     * @Route("/config/themes", name="config_themes", methods = {"GET"})
     */
