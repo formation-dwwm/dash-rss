@@ -18,8 +18,8 @@
             {% for post in posts %}
             <tr>
                 <td type="button" data-toggle="collapse" data-target="#collapseExample{{ post.id }}" aria-expanded="false" aria-controls="collapseExample">{{ post.date.date|date('d/m/Y') }}</td>
-                <td>{{ post.idTheme.name }}</td>
-                <td>{{ post.idSource.name }}</td>
+                <td>{% if post.idTheme %}{{ post.idTheme.name }}{% endif %}</td>
+                <td>{% if post.idSource %}{{ post.idSource.name }}{% endif %}</td>
                 <td>{{ post.title }}</td>
             </tr>
             
