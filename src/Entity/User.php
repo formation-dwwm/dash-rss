@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\GroupDash;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use App\Entity\GroupDash;
  * @ORM\Table(name="user", indexes={@ORM\Index(name="user_group_dash_FK", columns={"id_group_dash"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -38,10 +39,22 @@ class User
 
     /**
      * @var string
+     */
+    private $salt;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
+
+    /**
+     * @var string
+     * HACK
+     * @ORM\Column(name="roles",type="string", length=50,nullable=false)
+     */
+    private $roles = 'user';
 
     /**
      * @var \GroupDash
@@ -52,6 +65,33 @@ class User
      * })
      */
     private $idGroupDash;
+
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): ?string
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt(): ?string 
+    {
+        return $this->salt;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->user;
+    }
+
+    public function eraseCredentials(): void
+    {
+
+    }
 
     public function getId(): ?int
     {
