@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Source;
+use App\Entity\Theme;
+use App\Entity\Tag;
 use App\Form\Type\SourceType;
+use App\Form\Type\ThemeType;
+use App\Form\Type\TagType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -14,6 +18,8 @@ use App\Repository\sourceRepository;
 
 
 class AdminController extends AbstractController
+
+    
 {
     /**
     * @Route("/pinboard", name="pinboard", methods = {"GET"})
@@ -86,39 +92,69 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('config_rss');
         }
 
-        $feeds = $this->getDataSource();
+        $repository = $this->getDoctrine()->getRepository(Source::class);
+        $feeds = $repository->findAll();
 
         return $this->render('config/config_rss.html.twig', [
-            'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfig' => $addForm->createView(), 'feeds' => $feeds
+            'name' => 'Ajouter un nouveau flux RSS', 'page_title' => $page_title, 'formConfigRSS' => $addForm->createView(), 'feeds' => $feeds
         ]);
     }
 
-    public function getDataSource()
-    {
-        $repository = $this->getDoctrine()->getRepository(Source::class);
-        return $repository->findAll();
-    }
-
-   
     /**
-    * @Route("/config/themes", name="config_themes", methods = {"GET"})
+    * @Route("/config/themes", name="config_themes")
     */
-    public function configuration_themes()
+    public function configuration_themes(Request $request)
     {
         $page_title = 'Configuration des thèmes';
-        return $this->render('config/config.html.twig', [
-            'name' => 'Configuration Thèmes', 'page_title' => $page_title
+        
+        $themes = new Theme();
+
+        $addForm = $this->createForm(ThemeType::class, $themes);
+        $addForm->handleRequest($request);
+        if ($addForm->isSubmitted() && $addForm->isValid()) {
+            $themes = $addForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($themes);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('config_themes');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(Theme::class);
+        $themes = $repository->findAll();
+
+        return $this->render('config/config_themes.html.twig', [
+            'name' => 'Configuration des thèmes', 'page_title' => $page_title, 'formConfigTheme' => $addForm->createView(), 'themes' => $themes
         ]);
     }
 
     /**
-    * @Route("/config/tags", name="config_tags", methods = {"GET"})
+    * @Route("/config/tags", name="config_tags")
     */
-    public function configuration_tags()
+    public function configuration_tags(Request $request)
     {
         $page_title = 'Configuration des mots-clés';
-        return $this->render('config/config.html.twig', [
-            'name' => 'Configuration Mots-clés', 'page_title' => $page_title
+
+        $tags = new Tag();
+
+        $addForm = $this->createForm(TagType::class, $tags);
+        $addForm->handleRequest($request);
+        if ($addForm->isSubmitted() && $addForm->isValid()) {
+            $tags = $addForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($tags);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('config_tags');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(Tag::class);
+        $tags = $repository->findAll();
+
+        return $this->render('config/config_tags.html.twig', [
+            'name' => 'Configuration Mots-clés', 'page_title' => $page_title, 'formConfigTag' => $addForm->createView(), 'tags' => $tags
         ]);
     }
 

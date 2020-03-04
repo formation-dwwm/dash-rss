@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Source;
+use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,42 +13,44 @@ class ApiController extends AbstractController
 {
    
     /**
-     * @Route("api/source/{id}", methods={"POST"})
+     * @Route("api/configuration/{id}", methods={"POST"})
      */
-    function updateFeed(Request $req, int $id){
+    function updateFeed(Request $req, int $id) {
 
         $data = [];
         if ($content = $req->getContent()) {
             $data = json_decode($content, true);
         }
 
-        // Update source if exists
+        // Update data if exists
         $entityManager = $this->getDoctrine()->getManager();
-        $source = $this->getDoctrine()->getRepository(Source::class)->find($id);
-
-        if (!$source) {
-            throw $this->createNotFoundException(
-                'No source found for id '.$id
-            );
+        if ($data['entity'] == 'Source') {
+            $repository = $this->getDoctrine()->getRepository(Source::class)->find($id);
+            $repository->setName($data['name']);
+            $repository->setRssUrl($data['url']);
+        } else if ($data['entity'] == 'Tag') {
+            $repository = $this->getDoctrine()->getRepository(Tag::class)->find($id);
+            $repository->setTag($data['tag']);
         }
 
-        $source->setName($data['name']);
-        $source->setRssUrl($data['url']);
-        $entityManager->persist($source);
-        $entityManager->flush();
-
-        $res = new JsonResponse([
-            "success" => true
-        ]);
-
-
-        $res->headers->set('Access-Control-Allow-Origin', '*');
-
-        return $res;
+        if (!$repository) {
+            throw $this->createNotFoundException(
+                'No data found for id '.$id
+            );
+        } else {
+            $entityManager->persist($repository);
+            $entityManager->flush();
+            $res = new JsonResponse([
+                "success" => true
+            ]);
+            $res->headers->set('Access-Control-Allow-Origin', '*');
+    
+            return $res;
+        }
     }
 
     /**
-     * @Route("api/source/{id}", methods={"DELETE"})
+     * @Route("api/configuration/{id}", methods={"DELETE"})
      */
     function removeFeed(Request $req, int $id){
         $data = [];
@@ -55,26 +58,33 @@ class ApiController extends AbstractController
             $data = json_decode($content, true);
         }
 
-        // Delete source if exists
+        // Delete data if exists
         $entityManager = $this->getDoctrine()->getManager();
-        $source = $this->getDoctrine()->getRepository(Source::class)->find($id);
 
-        if (!$source) {
+        if ($data['entity'] == 'Source') {
+            $repository = $this->getDoctrine()->getRepository(Source::class)->find($id);
+        } else if ($data['entity'] == 'Tag'){
+            $repository = $this->getDoctrine()->getRepository(Tag::class)->find($id);
+        }
+       
+
+        if (!$repository) {
             throw $this->createNotFoundException(
-                'No source found for id '.$id
+                'No data found for id '.$id
             );
         }
+        else {
+            $entityManager->remove($repository);
+            $entityManager->flush();
 
-        $entityManager->remove($source);
-        $entityManager->flush();
+            $res = new JsonResponse([
+                "success" => true
+            ]);
 
-        $res = new JsonResponse([
-            "success" => true
-        ]);
+            $res->headers->set('Access-Control-Allow-Origin', '*');
 
-        $res->headers->set('Access-Control-Allow-Origin', '*');
-
-        return $res;
+            return $res;
+        }
     }
 
 }

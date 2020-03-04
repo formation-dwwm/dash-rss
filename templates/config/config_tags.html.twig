@@ -1,0 +1,41 @@
+{% extends 'config/config.html.twig' %}
+{% block main %}
+    <div class="row my-2">
+        <div class="col d-flex justify-content-center">
+            <h3>Configuration des mots-clés</h3>
+        </div>
+    </div>
+    <div class="row">
+        {# Form Builder #}
+        <div class="col-12 offset-lg-3 col-lg-6 p-3 border rounded">
+            
+                    {{ form(formConfigTag) }}
+              
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <h3>//TODO: filter function here!</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for tag in tags %}
+            <div class="col-12">
+                <form class="form-inline d-flex justify-content-center my-1">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" style="width: 300px;" id="tag-{{ tag.id }}" value="{{tag.tag}}">
+                        <button type="submit" btn-type="update" btn-entity="Tag" class="btn btn-outline-dark mb-2 mx-sm-2 my-2 my-sm-0" data-id="{{tag.id}}">Modifier</button>
+                        <button type="submit" btn-type="delete" btn-entity="Tag" class="btn btn-dark mb-2 my-2 my-sm-0" data-id="{{tag.id}}">Supprimer</button>
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            Aucun mot-clé trouvé.
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/javascript/backoffice.js"></script>
+{% endblock %}

@@ -188,16 +188,15 @@ class Post
         return $this->state;
     }
 
+    // public function setState(string $state): self
+    // {
+    //     if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
+    //         throw new \InvalidArgumentException("État non reconnu");
+    //     }
+    //     $this->state = $state;
 
-    public function setState(string $state): self
-    {
-        if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
-            throw new \InvalidArgumentException("État non reconnu");
-        }
-        $this->state = $state;
-
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getAlert(): ?bool
     {
