@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="navbar-brand mb-0 h1">
+    {{page_title}}
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link {{ active_link('pinboard') }}" href="/pinboard">Pin Board</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active_link('feed') }}" href="/feed">Le flux (339) </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active_link('sendbox') }}" href="/sendbox">Boîte d'envoi (165)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active_link('trash') }}" href="/trash">Corbeille (33691)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active_link('config') }}" href="/config">Configuration</a>
+      </li>
+    </ul>
+  </div>
+</nav>

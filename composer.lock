@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36b6a87fb1369b96f4e13f15d49a24fe",
+
+    "content-hash": "9370c43cbace4c794c01414f6b96c183",
+
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -70,7 +72,7 @@
             "keywords": [
                 "annotations",
                 "docblock",
-                "parser"
+                 "parser"
             ],
             "time": "2019-10-01T18:55:10+00:00"
         },

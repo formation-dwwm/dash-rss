@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{page_title}}{% endblock %}
+
+{% block body %}
+    {% block sub_menu %}
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center p-2">
+            <h4><a href="/config/rss" class="badge {{ route_name == 'config_rss' or route_name == 'config' ? 'badge-dark' : 'badge-light' }} p-2 m-2">Flux RSS</a></h4>
+            <h4><a href="/config/themes" class="badge {{ route_name == 'config_themes' ? 'badge-dark' : 'badge-light' }} p-2 m-2">Thèmes</a></h4>
+            <h4><a href="/config/tags" class="badge {{ route_name == 'config_tags' ? 'badge-dark' : 'badge-light' }} p-2 m-2">Mots-clés</a></h4>
+            <h4><a href="/config/authors" class="badge {{ route_name == 'config_authors' ? 'badge-dark' : 'badge-light' }} p-2 m-2">Auteurs</a></h4>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block main %}{% endblock %}
+
+{% endblock %}

@@ -19,10 +19,18 @@ class SourceRepository extends ServiceEntityRepository
         parent::__construct($registry, Source::class);
     }
 
+
+    /**
+     * @return Source[] Returns an array of Source objects
+     */
+
+    
+
     // /**
     //  * @return Source[] Returns an array of Source objects
     //  */
     /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('s')
@@ -34,7 +42,9 @@ class SourceRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
     */
+
 
     /*
     public function findOneBySomeField($value): ?Source
