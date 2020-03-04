@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Post
  *
  * @ORM\Table(name="post", indexes={@ORM\Index(name="post_theme0_FK", columns={"id_theme"}), @ORM\Index(name="post_source_FK", columns={"id_source"})})
+
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
@@ -97,12 +98,37 @@ class Post
     private $idContent;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $post_url;
+
+    /**
+
      * Constructor
      */
     public function __construct()
     {
         $this->idContent = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function setState($state){
+        if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
+            throw new \InvalidArgumentException("État non reconnu");
+        }
+    }
+
+    public function getPostUrl(): ?string
+    {
+        return $this->post_url;
+    }
+
+    public function setPostUrl(string $post_url): self
+    {
+        $this->post_url = $post_url;
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -161,6 +187,7 @@ class Post
     {
         return $this->state;
     }
+
 
     public function setState(string $state): self
     {
