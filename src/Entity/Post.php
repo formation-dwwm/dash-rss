@@ -115,6 +115,10 @@ class Post
         if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
             throw new \InvalidArgumentException("État non reconnu");
         }
+
+        $this->state = $state;
+
+        return $this;
     }
 
     public function getPostUrl(): ?string
