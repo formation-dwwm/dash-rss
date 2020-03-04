@@ -13,7 +13,7 @@ class ApiController extends AbstractController
 {
    
     /**
-     * @Route("api/configuration/{id}", methods={"POST"})
+     * @Route("api/config/{entity}/{id}", methods={"POST"})
      */
     function updateFeed(Request $req, int $id) {
 
@@ -50,7 +50,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("api/configuration/{id}", methods={"DELETE"})
+     * @Route("api/config/{entity}/{id}", methods={"DELETE"})
      */
     function removeFeed(Request $req, int $id){
         $data = [];

@@ -23,9 +23,9 @@ final class Version20200227100615 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE post CHANGE id_source id_source INT DEFAULT NULL, CHANGE id_theme id_theme INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE content RENAME INDEX content_post0_fk TO IDX_FEC530A9D1AA708F');
-        $this->addSql('ALTER TABLE access RENAME INDEX access_group_dash0_fk TO IDX_6692B5417BE06A7');
-        $this->addSql('ALTER TABLE user CHANGE id_group_dash id_group_dash INT DEFAULT NULL');
+        // $this->addSql('ALTER TABLE content RENAME INDEX content_post0_fk TO IDX_FEC530A9D1AA708F');
+        // $this->addSql('ALTER TABLE access RENAME INDEX access_group_dash0_fk TO IDX_6692B5417BE06A7');
+        // $this->addSql('ALTER TABLE user CHANGE id_group_dash id_group_dash INT DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void

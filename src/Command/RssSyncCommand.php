@@ -81,6 +81,7 @@ class RssSyncCommand extends Command
                     $post->setState(POST::STATE_TRIAGE);
                     $post->setAuthor("");
                     $post->setAlert(false);
+                    $post->setIdSource($source);
 
                     $this->em->persist($post);
                 }

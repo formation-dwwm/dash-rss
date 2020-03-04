@@ -8,14 +8,12 @@ use App\Entity\Tag;
 use App\Form\Type\SourceType;
 use App\Form\Type\ThemeType;
 use App\Form\Type\TagType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-use App\Repository\sourceRepository;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Process;
 
 class AdminController extends AbstractController
 
@@ -159,13 +157,33 @@ class AdminController extends AbstractController
     }
 
     /**
-    * @Route("/config/authors", name="config_authors", methods = {"GET"})
+    * @Route("/config/authors", name="config_authors")
     */
     public function configuration_authors()
     {
         $page_title = 'Configuration des auteurs';
         return $this->render('config/config.html.twig', [
             'name' => 'Configuration Auteurs', 'page_title' => $page_title
+        ]);
+    }
+
+    /**
+     * @Route("/rss/sync", name="sync_rss")
+     */
+    public function startSync(KernelInterface $kernel){
+        $projectRoot = $kernel->getProjectDir();
+
+        $process = new Process(array('php', $projectRoot.'/bin/console',  'app:rss:sync'));
+        $process->start();
+
+        $process->wait();
+
+        $output = $process->getOutput();
+
+        return new JsonResponse([
+            "success" => true
+            // "jobStarted" => true,
+            // "ouput" => $output
         ]);
     }
 }

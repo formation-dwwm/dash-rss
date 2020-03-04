@@ -6,7 +6,7 @@ document.addEventListener('click', event => {
 
         if (entity == "Source"){
             id = $ctrl.getAttribute('data-id');
-            btnType = $ctrl.getAttribute('btn-type');
+            btnAction = $ctrl.getAttribute('btn-action');
             name = document.getElementById(`name-${id}`).value;
             url = document.getElementById(`url-${id}`).value;
             data = {
@@ -16,7 +16,7 @@ document.addEventListener('click', event => {
             }
         } else if (entity == "Tag"){
             id = $ctrl.getAttribute('data-id');
-            btnType = $ctrl.getAttribute('btn-type');
+            btnAction = $ctrl.getAttribute('btn-action');
             tag = document.getElementById(`tag-${id}`).value;
             data = {
                 'tag' : tag,
@@ -24,9 +24,9 @@ document.addEventListener('click', event => {
             }
         }
     
-        if (btnType =='update'){
+        if (btnAction == 'update'){
             event.preventDefault();
-            return fetch("/api/configuration/" + id, {
+            return fetch(`/api/config/${entity}/${id}`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -39,8 +39,8 @@ document.addEventListener('click', event => {
             });
         }
     
-        if (btnType =='delete'){
-            return fetch("/api/configuration/" + id, {
+        if (btnAction == 'delete'){
+            return fetch(`/api/config/${entity}/${id}`, {
                 method: "DELETE", 
                 headers: {
                     "Content-Type": "application/json"

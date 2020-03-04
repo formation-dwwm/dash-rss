@@ -24,14 +24,14 @@ final class Version20200302145421 extends AbstractMigration
 
         $this->addSql('ALTER TABLE post ADD alert TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE content DROP FOREIGN KEY content_tag_FK');
-        $this->addSql('DROP INDEX IDX_FEC530A9BF396750 ON content');
+        $this->addSql('DROP INDEX IDX_FEC530A9D1AA708F ON content');
         $this->addSql('ALTER TABLE content DROP PRIMARY KEY');
         $this->addSql('ALTER TABLE content CHANGE id id_content INT NOT NULL');
         $this->addSql('ALTER TABLE content ADD CONSTRAINT FK_FEC530A9205899D9 FOREIGN KEY (id_content) REFERENCES tag (id)');
         $this->addSql('CREATE INDEX IDX_FEC530A9205899D9 ON content (id_content)');
         $this->addSql('ALTER TABLE content ADD PRIMARY KEY (id_content, id_post)');
         $this->addSql('ALTER TABLE access DROP FOREIGN KEY access_theme_FK');
-        $this->addSql('DROP INDEX IDX_6692B54BF396750 ON access');
+        $this->addSql('DROP INDEX IDX_6692B5417BE06A7 ON access');
         $this->addSql('ALTER TABLE access DROP PRIMARY KEY');
         $this->addSql('ALTER TABLE access CHANGE id id_theme INT NOT NULL');
         $this->addSql('ALTER TABLE access ADD CONSTRAINT FK_6692B5479F0A638 FOREIGN KEY (id_theme) REFERENCES theme (id)');
