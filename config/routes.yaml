@@ -1,3 +1,7 @@
-# index:
-#    path: /
-#    controller: App\Controller\FluxController::index
+
+index:
+    path: /public
+    controller: App\Controller\IndexController::index
+login:
+    path: /public/login
+    controller: App\Controller\SecurityController::login
