@@ -10,11 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  * Post
  *
  * @ORM\Table(name="post", indexes={@ORM\Index(name="post_theme0_FK", columns={"id_theme"}), @ORM\Index(name="post_source_FK", columns={"id_source"})})
- *  @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+
+ * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
 class Post
 {
-    
+
     const STATE_TRIAGE = 'triage';
     const STATE_PUBLISHED = 'published';
     const STATE_REMOVED = 'removed';
@@ -102,6 +103,7 @@ class Post
     private $post_url;
 
     /**
+
      * Constructor
      */
     public function __construct()
@@ -130,6 +132,7 @@ class Post
 
         return $this;
     }
+
 
     public function getId(): ?int
     {
@@ -188,6 +191,16 @@ class Post
     {
         return $this->state;
     }
+
+    // public function setState(string $state): self
+    // {
+    //     if (!in_array($state, array(self::STATE_TRIAGE, self::STATE_PUBLISHED, self::STATE_REMOVED))) {
+    //         throw new \InvalidArgumentException("État non reconnu");
+    //     }
+    //     $this->state = $state;
+
+    //     return $this;
+    // }
 
     public function getAlert(): ?bool
     {
@@ -252,4 +265,5 @@ class Post
 
         return $this;
     }
+
 }

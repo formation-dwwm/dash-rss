@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\GroupDash;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * User
  *

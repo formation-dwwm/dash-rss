@@ -27,7 +27,15 @@
                     <td colspan="4">
                         <div class="card card-body">
                         <a href="{{ post.postUrl }}">{{ post.content }}</a>
-                        <p>Auteur : {{ post.author }}  Mots-clés : </p>
+                        <p>
+                            Auteur : {{ post.author }}  
+                            {% if post.idContent.count > 0 %}
+                                Mots-clés : 
+                                {% for tag in post.idContent %}
+                                    {{ tag.tag }}
+                                {% endfor %}
+                            {% endif %}
+                        </p>
                         </div>
                         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="btn-group ml-2" role="group" aria-label="First group">

@@ -10,7 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  * GroupDash
  *
  * @ORM\Table(name="group_dash")
- * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+
+ * @ORM\Entity(repositoryClass="App\Repository\GroupDashRepository")
+
  */
 class GroupDash
 {
@@ -109,4 +111,6 @@ class GroupDash
         return $this;
     }
 
+
 }
+

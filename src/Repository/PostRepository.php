@@ -22,7 +22,9 @@ class PostRepository extends ServiceEntityRepository
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
-    
+
+    /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('p')
@@ -34,9 +36,14 @@ class PostRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    */
+
+    /*
+
     
 
- 
+
     public function findOneBySomeField($value): ?Post
     {
         return $this->createQueryBuilder('p')
@@ -46,5 +53,9 @@ class PostRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    */
+
    
+
 }
